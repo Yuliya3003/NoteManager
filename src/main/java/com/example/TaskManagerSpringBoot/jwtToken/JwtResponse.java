@@ -1,4 +1,4 @@
-package com.example.TaskManagerSpringBoot;
+package com.example.TaskManagerSpringBoot.jwtToken;
 
 public class JwtResponse {
     private final String jwt;

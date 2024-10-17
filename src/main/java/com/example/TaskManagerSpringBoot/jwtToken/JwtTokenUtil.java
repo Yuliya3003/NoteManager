@@ -1,4 +1,4 @@
-package com.example.TaskManagerSpringBoot;
+package com.example.TaskManagerSpringBoot.jwtToken;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

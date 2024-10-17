@@ -2,7 +2,7 @@ package com.example.TaskManagerSpringBoot.controller;
 
 import com.example.TaskManagerSpringBoot.model.AuthenticationRequest;
 import com.example.TaskManagerSpringBoot.service.AuthenticationService;
-import com.example.TaskManagerSpringBoot.JwtResponse;
+import com.example.TaskManagerSpringBoot.jwtToken.JwtResponse;
 import com.example.TaskManagerSpringBoot.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

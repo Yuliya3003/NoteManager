@@ -1,6 +1,7 @@
 package com.example.TaskManagerSpringBoot.service;
 
 
+import com.example.TaskManagerSpringBoot.logging.LoggedExecution;
 import com.example.TaskManagerSpringBoot.model.Note;
 import com.example.TaskManagerSpringBoot.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,21 +20,25 @@ public class NoteService {
     }
 
     //Добавление заметки
+    @LoggedExecution
     public Note createNote(Note note){
         return noteRepository.save(note);
     }
 
     //Просмотр всех заметок
+    @LoggedExecution
     public List<Note> findAllNotes(){
         return noteRepository.findAll();
     }
 
     //Получение заметки по Id
+    @LoggedExecution
     public Optional<Note> findById(Long id){
         return noteRepository.findById(id);
     }
 
     //Редактирование заметки
+    @LoggedExecution
     public Note updateNote(Long id, Note updatedNote){
         return noteRepository.findById(id)
                 .map(note -> {
@@ -45,14 +50,17 @@ public class NoteService {
     }
 
     //Удаление заметки
+    @LoggedExecution
     public void deleteNote(Long id){
         noteRepository.deleteById(id);
     }
 
+    @LoggedExecution
     public List<Note> findAllNotesByTitleContainingIgnoreCase(String keyword){
         return noteRepository.findAllNotesByTitleContainingIgnoreCase(keyword);
     }
 
+    @LoggedExecution
     public List<Note> findAllNotesByContentContainingIgnoreCase(String keywordContent){
         return noteRepository.findAllNotesByContentContainingIgnoreCase(keywordContent);
     }

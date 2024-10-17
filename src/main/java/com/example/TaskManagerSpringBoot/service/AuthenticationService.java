@@ -1,7 +1,8 @@
 package com.example.TaskManagerSpringBoot.service;
 
+import com.example.TaskManagerSpringBoot.logging.LoggedExecution;
 import com.example.TaskManagerSpringBoot.model.AuthenticationRequest;
-import com.example.TaskManagerSpringBoot.JwtTokenUtil;
+import com.example.TaskManagerSpringBoot.jwtToken.JwtTokenUtil;
 import com.example.TaskManagerSpringBoot.model.UserEntity;
 import com.example.TaskManagerSpringBoot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ public class AuthenticationService {
     private UserRepository userRepository;
 
     // Метод для регистрации пользователя
+    @LoggedExecution
     public void register(UserEntity registerRequest) {
         if (userRepository.findByUsername(registerRequest.getUsername()).isPresent()) {
             throw new RuntimeException("Пользователь уже существует");
@@ -44,6 +46,7 @@ public class AuthenticationService {
     }
 
     // Метод для логина пользователя и возврата JWT токена
+    @LoggedExecution
     public String login(AuthenticationRequest authenticationRequest) throws Exception {
         try {
             authenticationManager.authenticate(
