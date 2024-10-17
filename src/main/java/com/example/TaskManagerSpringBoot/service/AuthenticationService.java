@@ -32,7 +32,6 @@ public class AuthenticationService {
 
     // Метод для регистрации пользователя
     public void register(UserEntity registerRequest) {
-
         if (userRepository.findByUsername(registerRequest.getUsername()).isPresent()) {
             throw new RuntimeException("Пользователь уже существует");
         }
@@ -44,10 +43,9 @@ public class AuthenticationService {
         userRepository.save(newUser);
     }
 
-    // Метод для логина пользователя
+    // Метод для логина пользователя и возврата JWT токена
     public String login(AuthenticationRequest authenticationRequest) throws Exception {
         try {
-
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             authenticationRequest.getUsername(),
@@ -58,9 +56,7 @@ public class AuthenticationService {
             throw new Exception("Неправильный логин или пароль", e);
         }
 
-
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
-
         // Генерация JWT токена
         return jwtTokenUtil.generateToken(userDetails);
     }

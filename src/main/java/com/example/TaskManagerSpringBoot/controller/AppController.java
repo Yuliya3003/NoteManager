@@ -16,11 +16,13 @@ public class AppController {
     private AuthenticationService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody UserEntity user) {
+    public ResponseEntity<?> register(@RequestBody UserEntity user) throws Exception {
         authService.register(user);
-        return ResponseEntity.ok("User registered successfully!");
+        final String jwt = authService.login(new AuthenticationRequest(user.getUsername(), user.getPassword()));
+        return ResponseEntity.ok(new JwtResponse(jwt));
     }
 
+    // Логин пользователя и возврат JWT токена
     @PostMapping("/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
         final String jwt = authService.login(authenticationRequest);
